@@ -35,6 +35,38 @@ class Array
         new_arr
     end
 
+
+    def my_any?(&prc)
+        self.my_each do |el| 
+        
+            return true if prc.call(el) 
+
+        end
+        return false
+    end
+
+    def my_all?(&prc)
+
+        self.my_each do |el| 
+        
+            return false if !prc.call(el) 
+
+        end
+        return true
+
+    end
+
+    def my_flatten
+
+        return [self] if self == !self.to_a?
+
+        
+        (self.length - 1)
+
+        
+
+    end
+
 end
 
 
@@ -66,3 +98,10 @@ p "----------------Question 2----------------"
 a = [1, 2, 3]
 p a.my_reject { |num| num > 1 } # => [1]
 p a.my_reject { |num| num == 4 } # => [1, 2, 3]
+
+p "----------------Question 2----------------"
+
+p a.my_any? { |num| num > 1 } # => true
+p a.my_any? { |num| num == 4 } # => false
+p a.my_all? { |num| num > 1 } # => false
+p a.my_all? { |num| num < 4 } # => true
